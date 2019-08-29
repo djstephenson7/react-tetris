@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
-import { randomTetromino } from "../helpers/tetrominos";
+import { Tetrominos, randomTetromino } from "../helpers/tetrominos";
 import { stageWidth } from "../helpers/stageHelpers";
 
 export const UsePlayer = () => {
   const [player, setPlayer] = useState({
     pos: { x: 0, y: 0 },
-    tetromino: randomTetromino().shape,
+    tetromino: Tetrominos[0].shape,
     collided: false
   });
 
