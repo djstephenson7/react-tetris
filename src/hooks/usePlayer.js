@@ -24,5 +24,6 @@ export const UsePlayer = () => {
       collided: false
     });
   }, []);
+
   return [player, updatePlayerPos, resetPlayer];
 };
