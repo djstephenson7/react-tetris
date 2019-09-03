@@ -4,7 +4,7 @@ import Display from "./common/display";
 import StartButton from "./common/startButton";
 import { UsePlayer } from "../hooks/usePlayer";
 import { UseStage } from "../hooks/useStage";
-import { CreateStage } from "../helpers/stageHelpers";
+import { CreateStage, checkCollision } from "../helpers/stageHelpers";
 import {
   StyledTetrisWrapper,
   StyledTetris
@@ -18,7 +18,9 @@ const Tetris = () => {
   const [stage, setStage] = UseStage(player);
 
   const movePlayer = dir => {
-    updatePlayerPos({ x: dir, y: 1, collided: false });
+    if (!checkCollision(player, stage, { x: dir, y: 0 })) {
+      updatePlayerPos({ x: dir, y: 0, collided: false });
+    }
   };
 
   const startGame = () => {
