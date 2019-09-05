@@ -4,7 +4,8 @@ import Display from "./common/display";
 import StartButton from "./common/startButton";
 import { usePlayer } from "../hooks/usePlayer";
 import { UseStage } from "../hooks/useStage";
-import { CreateStage, checkCollision } from "../helpers/stageHelpers";
+import { useInterval } from "../hooks/useInterval";
+import { createStage, checkCollision } from "../helpers/stageHelpers";
 import {
   StyledTetrisWrapper,
   StyledTetris
@@ -25,7 +26,8 @@ const Tetris = () => {
 
   const startGame = () => {
     // Reset everything
-    setStage(CreateStage());
+    setStage(createStage());
+    setDropTime(1000);
     resetPlayer();
     setGameOver(false);
   };
@@ -61,6 +63,10 @@ const Tetris = () => {
       }
     }
   };
+
+  useInterval(() => {
+    drop();
+  }, dropTime);
 
   return (
     <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
